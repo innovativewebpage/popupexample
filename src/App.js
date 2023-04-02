@@ -1,26 +1,59 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{Component} from 'react';
+import Popup from './Popup';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+
+	constructor(props)
+	{
+		super(props);
+		this.state = {
+			showPopup : false,
+			text:""
+		}
+		this.handleChange = this.handleChange.bind(this);
+		this.togglePop = this.togglePop.bind(this);
+	}
+	
+	handleChange(e) {
+	this.setState({		
+		text:e.target.value
+	});
+	}
+	
+	togglePop(){
+	this.setState({		
+		showPopup:!this.state.showPopup
+		//showPopup:true
+	});	
+	}	
+
+	render()
+	{
+		return(
+					//<h1>Hello World</h1>
+					
+			<div>		
+			<label for="">USERNAME</label><br/>
+<input type="text" id="i1" 
+onChange={this.handleChange}
+value={this.state.text}/>
+
+
+
+<br/>
+<button className="button" onClick={this.togglePop}>CLICK ME</button>
+
+{this.state.showPopup ?
+<Popup text = "Pop Message!" 
+closePopup ={this.togglePop} 
+value={this.state.text}/> 
+
+:null	
+	}		
+			</div>
+		);
+	}
+
 }
-
 export default App;
+
